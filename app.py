@@ -42,22 +42,30 @@ def getTracks():
     playlists = []
     for playlist in current_playlists:
         playlists.append(playlist['id'])
-    
-    items_of_first = sp.playlist_items(playlists[1])
+
+    start=0
+    song_uris=[]
+    while True:
+        items= sp.playlist_items(playlists[0], limit=100, offset=start*50)
+        for song in items['items']:
+            song_uri = song['track']['name']
+            song_uris.append(song_uri)
+        start += 1
+        if (len((items['items'])) < 100):
+            break
+    '''
+    items_of_first = sp.playlist_items(playlists[1], limit=100)
+    song_uris = []
+
+    for song in items_of_first['items']:
+        song_uri = song['track']['name']
+        song_uris.append(song_uri)
+    '''
+    return(song_uris)
     
     '''
     all_songs = []
     start = 0
-    if len(sys.argv) > 1:
-        username = sys.argv[1]
-    else:
-        print("Whoops, need a username!")
-        print("usage: python user_playlists.py [username]")
-        sys.exit()
-    playlists = sp.user_playlists(username)
-
-    for playlist in playlists['items']:
-        print(playlist['name'])
     
     while True:
         items = sp.user_playlist(limit=50, offset=start*50)['items']
@@ -87,5 +95,5 @@ def create_spotify_oauth():
             client_secret='eb61ba04ff4f4ea3a921b8ed6c66b521',
             redirect_uri=url_for('redirectPage', _external=True),
             #scope = "playlist-read-private playlist-read-collaborative")
-            scope = "user-library-read")
+            scope = "user-library-read playlist-read-private playlist-read-collaborative")
     
