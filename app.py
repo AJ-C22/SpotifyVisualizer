@@ -3,6 +3,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
 import sys
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -45,13 +46,15 @@ def getTracks():
 
     
     song_uris=[]
-    
+
     def allPlaylistSongs(playlist_id):
         start=0
         while True:
             items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
             for song in items['items']:
-                song_uri = song['track']['name']
+                name = song['track']['name']
+                artist = song['track']['artist']
+                
                 song_uris.append(song_uri)
             start += 1
             if (len((items['items'])) < 100):
@@ -59,22 +62,7 @@ def getTracks():
 
     for playlist_id in playlists:
         allPlaylistSongs(playlist_id)
-            
     return(song_uris)
-    
-    '''
-    all_songs = []
-    start = 0
-    
-    while True:
-        items = sp.user_playlist(limit=50, offset=start*50)['items']
-        start += 1
-        all_songs += items
-        if (len(items) < 50):
-            break
-    
-    return str(all_songs)
-    '''
 
 
 def get_token():
@@ -93,6 +81,5 @@ def create_spotify_oauth():
             client_id='65d88f8d3c8d409da1893e3caa0c833f',
             client_secret='eb61ba04ff4f4ea3a921b8ed6c66b521',
             redirect_uri=url_for('redirectPage', _external=True),
-            #scope = "playlist-read-private playlist-read-collaborative")
             scope = "user-library-read playlist-read-private playlist-read-collaborative")
     
