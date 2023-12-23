@@ -43,24 +43,23 @@ def getTracks():
     for playlist in current_playlists:
         playlists.append(playlist['id'])
 
-    start=0
+    
     song_uris=[]
-    while True:
-        items= sp.playlist_items(playlists[0], limit=100, offset=start*50)
-        for song in items['items']:
-            song_uri = song['track']['name']
-            song_uris.append(song_uri)
-        start += 1
-        if (len((items['items'])) < 100):
-            break
-    '''
-    items_of_first = sp.playlist_items(playlists[1], limit=100)
-    song_uris = []
+    
+    def allPlaylistSongs(playlist_id):
+        start=0
+        while True:
+            items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
+            for song in items['items']:
+                song_uri = song['track']['name']
+                song_uris.append(song_uri)
+            start += 1
+            if (len((items['items'])) < 100):
+                break
 
-    for song in items_of_first['items']:
-        song_uri = song['track']['name']
-        song_uris.append(song_uri)
-    '''
+    for playlist_id in playlists:
+        allPlaylistSongs(playlist_id)
+            
     return(song_uris)
     
     '''

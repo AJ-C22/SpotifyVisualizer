@@ -1,3 +1,6 @@
 list = [1,2,3,4]
 
-print(list[1])
+for i in list:
+    while True:
+        print(i)
+        break
