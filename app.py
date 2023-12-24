@@ -4,6 +4,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import time
 import sys
 import pandas as pd
+import math
 
 
 app = Flask(__name__)
@@ -44,7 +45,17 @@ def getTracks():
     for playlist in current_playlists:
         playlists.append(playlist['id'])
 
-    
+    filename = 'songs.csv'
+    f = open(filename, 'a')
+    headers = 'Name,Artist,Genre,Populatrity,Length,\n'
+    f.write(headers)
+
+    def msToMin(ms):
+        ms/60000
+        minutes= math.floor(ms/60000)
+        seconds = round(60*((ms/60000)-minutes))
+        return(str(minutes)+'min '+str(seconds)+'sec')
+        
     song_uris=[]
 
     def allPlaylistSongs(playlist_id):
@@ -53,16 +64,30 @@ def getTracks():
             items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
             for song in items['items']:
                 name = song['track']['name']
-                artist = song['track']['artist']
+                artist = song['track']['artists'][0]['name']
+                #genre = song['track']['artists'][0]['genres']
+                '''
+                result = sp.search(artist)
+                track = result['tracks']['items'][0]
+                artist_help = sp.artist(track["artists"][0]["external_urls"]["spotify"])
+                genre = artist_help["genres"]
+                '''
+
+                popularity = song['track']['popularity']
+                length = song['track']['duration_ms']
+                #f.write(name+', '+ artist+', '+str(genre)+', '+str(popularity)+', '+ msToMin(length))
+                f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+'\n')
+                song_uris.extend([name, popularity])
                 
-                song_uris.append(song_uri)
             start += 1
             if (len((items['items'])) < 100):
                 break
 
-    for playlist_id in playlists:
-        allPlaylistSongs(playlist_id)
-    return(song_uris)
+    #for playlist_id in playlists:
+    #allPlaylistSongs(playlist_id)
+    allPlaylistSongs(playlists[9])
+    f.close()   
+    return(filename)
 
 
 def get_token():
