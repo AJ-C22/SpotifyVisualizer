@@ -46,8 +46,8 @@ def getTracks():
         playlists.append(playlist['id'])
 
     filename = 'songs.csv'
-    f = open(filename, 'a')
-    headers = 'Name,Artist,Genre,Populatrity,Length,\n'
+    f = open(filename, 'a', encoding="utf-8")
+    headers = 'Name,Artist,Populatrity,Length,\n'
     f.write(headers)
 
     def msToMin(ms):
@@ -57,39 +57,58 @@ def getTracks():
         return(str(minutes)+'min '+str(seconds)+'sec')
         
     song_uris=[]
-
     def allPlaylistSongs(playlist_id):
         start=0
         while True:
             items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
             for song in items['items']:
-                name = song['track']['name']
+                #name = song['track']['name']
                 artist = song['track']['artists'][0]['name']
-                #genre = song['track']['artists'][0]['genres']
-                '''
-                result = sp.search(artist)
-                track = result['tracks']['items'][0]
-                artist_help = sp.artist(track["artists"][0]["external_urls"]["spotify"])
-                genre = artist_help["genres"]
-                '''
+
+                #CURRENT GENRE TAKES TOO LONG TO GENERATE. FIND WORK AROUND
+                #artist_id = song['track']['artists'][0]['id']
+                #artist_obj = sp.artist(artist_id)
+                #genre = artist_obj['genres']
 
                 popularity = song['track']['popularity']
                 length = song['track']['duration_ms']
-                #f.write(name+', '+ artist+', '+str(genre)+', '+str(popularity)+', '+ msToMin(length))
-                f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+'\n')
-                song_uris.extend([name, popularity])
+                #f.write(name+', '+ artist+', '+str(genre[0])+', '+str(popularity)+', '+ msToMin(length))
+                #f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+'\n')
+                #song_uris.extend([name, popularity])
                 
             start += 1
             if (len((items['items'])) < 100):
                 break
+    
+    genres = []
+    def getGenres(playlist_id):
+         start = 0
+         while True:
+            items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
+            for song in items['items']:
+
+                artist_id= song['track']['artists'][0]['id']
+                
+                artist = sp.artist(artist_id)
+                genres.append('spotify:artist:3jOstUTkEu2JkjvRdBA5Gu')
+                '''genre_obj = artist_obj['genres']
+                genres.append(genre_obj)'''
+                
+
+            start += 1
+            if (len((items['items'])) < 100):
+                break
+                
 
     #for playlist_id in playlists:
-    #allPlaylistSongs(playlist_id)
-    allPlaylistSongs(playlists[9])
+        #allPlaylistSongs(playlist_id)
+    #allPlaylistSongs(playlists[9])
+    #getGenres(playlists[1])
     f.close()   
-    return(filename)
 
+    return(genres)
 
+    
 def get_token():
     token_info = session.get(TOKEN_INFO, None)
     if not token_info:
