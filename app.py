@@ -35,8 +35,6 @@ def redirectPage():
 def homePage():
     return(render_template('index.html'))
 
-
-
 @app.route('/getTracks')
 def getTracks():
     try:

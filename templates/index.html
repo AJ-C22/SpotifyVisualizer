@@ -8,10 +8,35 @@
 </head>
 
 <body>
-    <h1>Welcome</h1>
-    <a href = "{{ url_for('getTracks', _external = True)}}">
-        <button> GetTracks</button>
-    </a>
+    <div class = "container">
+        <h1> <span> Spotify Library </span> Analyzer</h1>
+        <div class = "button-box">
+            <a href = "{{ url_for('getTracks', _external = True)}}">
+                <button class = "crit-btn"> CRITIQUE</button>
+            </a>
+            <a href = "{{ url_for('getTracks', _external = True)}}">
+                <button class = "data-btn" > DATA DISTRIBUTION</button>
+            </a>
+            <a href = "{{ url_for('getTracks', _external = True)}}">
+                <button class = "top-btn"> TOP POINTS</button>
+            </a>
+        </div>
+    </div>
+    
+    <div class="area" >
+        <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+        </ul>
+</div >
 </body>
 
 
