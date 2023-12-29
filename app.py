@@ -35,23 +35,7 @@ def redirectPage():
 def homePage():
     return(render_template('index.html'))
 
-def get_token():
-    token_info = session.get(TOKEN_INFO, None)
-    if not token_info:
-        raise "exception"
-    now = int(time.time())
-    is_expired = token_info['expires_at'] - now <60
-    if (is_expired):
-        sp_oauth = create_spotify_oauth()
-        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
-    return token_info
 
-def create_spotify_oauth():
-    return SpotifyOAuth(
-            client_id='65d88f8d3c8d409da1893e3caa0c833f',
-            client_secret='eb61ba04ff4f4ea3a921b8ed6c66b521',
-            redirect_uri=url_for('redirectPage', _external=True),
-            scope = "user-library-read playlist-read-private playlist-read-collaborative")
 
 @app.route('/getTracks')
 def getTracks():
