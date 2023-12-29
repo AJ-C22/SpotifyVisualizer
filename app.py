@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, session, redirect
+from flask import Flask, request, url_for, session, redirect, render_template
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
@@ -29,7 +29,29 @@ def redirectPage():
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
     session[TOKEN_INFO] = token_info
-    return redirect(url_for('getTracks', _external=True))
+    return redirect(url_for('homePage', _external=True))
+
+@app.route('/homePage')
+def homePage():
+    return(render_template('index.html'))
+
+def get_token():
+    token_info = session.get(TOKEN_INFO, None)
+    if not token_info:
+        raise "exception"
+    now = int(time.time())
+    is_expired = token_info['expires_at'] - now <60
+    if (is_expired):
+        sp_oauth = create_spotify_oauth()
+        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
+    return token_info
+
+def create_spotify_oauth():
+    return SpotifyOAuth(
+            client_id='65d88f8d3c8d409da1893e3caa0c833f',
+            client_secret='eb61ba04ff4f4ea3a921b8ed6c66b521',
+            redirect_uri=url_for('redirectPage', _external=True),
+            scope = "user-library-read playlist-read-private playlist-read-collaborative")
 
 @app.route('/getTracks')
 def getTracks():
@@ -88,12 +110,12 @@ def getTracks():
             for song in items['items']:
 
                 artist_id= song['track']['artists'][0]['id']
-                
                 artist = sp.artist(artist_id)
-                genres.append('spotify:artist:3jOstUTkEu2JkjvRdBA5Gu')
-                '''genre_obj = artist_obj['genres']
-                genres.append(genre_obj)'''
-                
+                genre= artist['genres']
+                try:
+                    genres.append(str(genre[0]))
+                except:
+                    None
 
             start += 1
             if (len((items['items'])) < 100):
@@ -103,10 +125,10 @@ def getTracks():
     #for playlist_id in playlists:
         #allPlaylistSongs(playlist_id)
     #allPlaylistSongs(playlists[9])
-    #getGenres(playlists[1])
+    #getGenres(playlists[9])
     f.close()   
 
-    return(genres)
+    return('hello')
 
     
 def get_token():

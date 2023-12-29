@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script type="text/javascript" src = "{{ url_for('static', filename='script/script.js')}}"></script>
+    <link rel="stylesheet" href = "{{ url_for('static', filename='css/style.css')}}">
+
+</head>
+
+<body>
+    <h1>Welcome</h1>
+    <a href = "{{ url_for('getTracks', _external = True)}}">
+        <button> GetTracks</button>
+    </a>
+</body>
+
+
+</html>
