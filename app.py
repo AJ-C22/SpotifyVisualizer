@@ -51,18 +51,25 @@ def critiquePage():
 
     popularity_scores = []
     artists = []
-    def getPopularity(playlist_id):
+    def getPopularity():
         start=0
         while True:
-            items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
+            items= sp.current_user_saved_tracks(limit=50, offset=start*50)
             for song in items['items']:
                 popularity = song['track']['popularity']
                 artist = song['track']['artists'][0]['name']
-                artists.append(artist)
-                popularity_scores.append(popularity)
+                if artist in artists:
+                    None
+                else:
+                    artists.append(artist)
+
+                if popularity == 0 or popularity == 1:
+                    None
+                else:
+                    popularity_scores.append(popularity)
 
             start += 1
-            if (len((items['items'])) < 100):
+            if (len((items['items'])) < 50):
                 break
 
     global_artists = []
@@ -80,12 +87,14 @@ def critiquePage():
     def compare_intersect(x, y):
         return frozenset(x).intersection(y)
     
-    for playlist_id in playlists:
-        getPopularity(playlist_id)
-        getArtists('spotify:playlist:6UeSakyzhiEt4NB3UAd6NQ')
+ 
+    getPopularity()
+    getArtists('spotify:playlist:6UeSakyzhiEt4NB3UAd6NQ')
 
-    avg_pop = sum(popularity_scores) / len(popularity_scores)
+    avg_pop = round(sum(popularity_scores) / len(popularity_scores))
     same_artists = len(compare_intersect(artists, global_artists))
+    num_artists = len(artists)
+    
     return(render_template('critique.html', **locals()))
 
 
