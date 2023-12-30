@@ -37,7 +37,7 @@ span{
 }
 .button-box{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
     padding-top: 6%;
     column-gap: 30px;
@@ -53,7 +53,7 @@ button{
     box-shadow: 0 3px 6px rgb(197, 250, 197);
     cursor: pointer;
     border:none;
-    font-size: large;
+    font-size: 21px;
     letter-spacing: 2px;
     transition: .45s;
     background: -webkit-linear-gradient(132deg, #182C25 0%, #1E453E 100%);
@@ -183,6 +183,14 @@ button:hover{
     height: 150px;
     animation-delay: 0s;
     animation-duration: 11s;
+}
+
+.circles li:nth-child(11){
+    left: 85%;
+    width: 100px;
+    height: 150px;
+    animation-delay: 4s;
+    animation-duration: 14s;
 }
 
 

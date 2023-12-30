@@ -94,7 +94,7 @@ def critiquePage():
     avg_pop = round(sum(popularity_scores) / len(popularity_scores))
     same_artists = len(compare_intersect(artists, global_artists))
     num_artists = len(artists)
-    
+
     return(render_template('critique.html', **locals()))
 
 
@@ -132,56 +132,22 @@ def getTracks():
     #Use this: https://medium.com/analytics-vidhya/your-top-100-songs-2020-in-python-and-plotly-2e803d7e2990
 
     def allPlaylistSongs(playlist_id):
+        f = open('file.txt', 'w')
         start=0
         while True:
             items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
             for song in items['items']:
-                #name = song['track']['name']
+                name = song['track']['name']
                 artist = song['track']['artists'][0]['name']
-
-                #CURRENT GENRE TAKES TOO LONG TO GENERATE. FIND WORK AROUND
-                #artist_id = song['track']['artists'][0]['id']
-                #artist_obj = sp.artist(artist_id)
-                #genre = artist_obj['genres']
-
                 popularity = song['track']['popularity']
                 length = song['track']['duration_ms']
-                #f.write(name+', '+ artist+', '+str(genre[0])+', '+str(popularity)+', '+ msToMin(length))
                 #f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+'\n')
-                #song_uris.extend([name, popularity])
                 
             start += 1
             if (len((items['items'])) < 100):
-                break
-    
-    genres = []
-    def getGenres(playlist_id):
-         start = 0
-         while True:
-            items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
-            for song in items['items']:
+                break       
 
-                artist_id= song['track']['artists'][0]['id']
-                artist = sp.artist(artist_id)
-                genre= artist['genres']
-                try:
-                    genres.append(str(genre[0]))
-                except:
-                    None
-
-            start += 1
-            if (len((items['items'])) < 100):
-                break
-                
-
-    #for playlist_id in playlists:
-        #allPlaylistSongs(playlist_id)
-    #allPlaylistSongs(playlists[9])
-    #getGenres(playlists[9])
     f.close()   
-
-    return('hello')
-
     
 def get_token():
     token_info = session.get(TOKEN_INFO, None)
@@ -200,4 +166,26 @@ def create_spotify_oauth():
             client_secret='eb61ba04ff4f4ea3a921b8ed6c66b521',
             redirect_uri=url_for('redirectPage', _external=True),
             scope = "user-library-read playlist-read-private playlist-read-collaborative")
-    
+
+
+'''
+@app.route('/getGenres')
+    #genres = []
+def getGenres(playlist_id):
+        start = 0
+        while True:
+        items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
+        for song in items['items']:
+
+            artist_id= song['track']['artists'][0]['id']
+            artist = sp.artist(artist_id)
+            genre= artist['genres']
+            try:
+                genres.append(str(genre[0]))
+            except:
+                None
+
+        start += 1
+        if (len((items['items'])) < 100):
+            break
+'''
