@@ -50,29 +50,24 @@ button{
     color: white;
     margin: 10px;
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgb(122, 118, 118);
+    box-shadow: 0 3px 6px rgb(197, 250, 197);
     cursor: pointer;
     border:none;
     font-size: medium;
     transition: .45s;
+    background: -webkit-linear-gradient(132deg, #182C25 0%, #1E453E 100%);
 }
 
 .crit-btn{
-    background-color: -moz-linear-gradient(top, #ffafbd 0%, #ffc3a0 100%);
-    background: -webkit-linear-gradient(132deg, #ffafbd 0%, #ffc3a0 100%);
-    background-color: linear-gradient(132deg, #ffafbd 0%, #ffc3a0 100%);
+
 }
 
 .data-btn{
-    background-color: -moz-linear-gradient(top,  #c33764 0%, #1d2671 100%);
-    background: -webkit-linear-gradient(132deg, #c33764 0%, #1d2671 100%);
-    background-color: linear-gradient(132deg, #c33764 0%, #1d2671 100%);
+    
 }
 
 .top-btn{
-    background-color: -moz-linear-gradient(top,  #205072 0%, #cff4d2 100%);
-    background: -webkit-linear-gradient(132deg, #205072 0%, #cff4d2 100%);
-    background-color: linear-gradient(132deg, #205072 0%, #cff4d2 100%);
+   
 }
 
 button:hover{

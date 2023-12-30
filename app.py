@@ -35,6 +35,65 @@ def redirectPage():
 def homePage():
     return(render_template('index.html'))
 
+@app.route('/critiquePage')
+def critiquePage():
+    try:
+        token_info = get_token()
+    except:
+        print("user not logged in")
+        return redirect("/")
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+
+    current_playlists = sp.current_user_playlists()['items']
+    playlists = []
+    for playlist in current_playlists:
+        playlists.append(playlist['id'])
+
+    popularity_scores = []
+    artists = []
+    def getPopularity(playlist_id):
+        start=0
+        while True:
+            items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
+            for song in items['items']:
+                popularity = song['track']['popularity']
+                artist = song['track']['artists'][0]['name']
+                artists.append(artist)
+                popularity_scores.append(popularity)
+
+            start += 1
+            if (len((items['items'])) < 100):
+                break
+
+    global_artists = []
+    def getArtists(playlist_id):
+        start=0
+        while True:
+            items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
+            for song in items['items']:
+                artist = song['track']['artists'][0]['name']
+                global_artists.append(artist)
+            start += 1
+            if (len((items['items'])) < 100):
+                break
+
+    def compare_intersect(x, y):
+        return frozenset(x).intersection(y)
+    
+    for playlist_id in playlists:
+        getPopularity(playlist_id)
+        getArtists('spotify:playlist:6UeSakyzhiEt4NB3UAd6NQ')
+
+    avg_pop = sum(popularity_scores) / len(popularity_scores)
+    same_artists = len(compare_intersect(artists, global_artists))
+    return(render_template('critique.html', **locals()))
+
+
+
+
+
+
+
 @app.route('/getTracks')
 def getTracks():
     try:
@@ -61,6 +120,8 @@ def getTracks():
         return(str(minutes)+'min '+str(seconds)+'sec')
         
     song_uris=[]
+    #Use this: https://medium.com/analytics-vidhya/your-top-100-songs-2020-in-python-and-plotly-2e803d7e2990
+
     def allPlaylistSongs(playlist_id):
         start=0
         while True:
