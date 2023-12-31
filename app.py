@@ -5,6 +5,10 @@ import time
 import sys
 import pandas as pd
 import math
+import matplotlib.pyplot as plt 
+import seaborn as sns 
+from io import BytesIO
+import base64
 
 
 app = Flask(__name__)
@@ -117,11 +121,6 @@ def getTracks():
     for playlist in current_playlists:
         playlists.append(playlist['id'])
 
-    filename = 'songs.csv'
-    f = open(filename, 'a', encoding="utf-8")
-    headers = 'Name,Artist,Populatrity,Length,\n'
-    f.write(headers)
-
     def msToMin(ms):
         ms/60000
         minutes= math.floor(ms/60000)
@@ -131,23 +130,51 @@ def getTracks():
     song_uris=[]
     #Use this: https://medium.com/analytics-vidhya/your-top-100-songs-2020-in-python-and-plotly-2e803d7e2990
 
-    def allPlaylistSongs(playlist_id):
-        f = open('file.txt', 'w')
+    def allPlaylistSongs():
+
+        f = open('songs.csv', 'r+')
+        f.truncate(0)
+
+        filename = 'songs.csv'
+        f = open(filename, 'a', encoding="utf-8")
+        headers = 'Name,Artist,Populatrity,Length,Release\n'
+        f.write(headers)
+
         start=0
         while True:
-            items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
+            items= sp.current_user_saved_tracks(limit=50, offset=start*50)
             for song in items['items']:
                 name = song['track']['name']
+                name = name.replace(",", "")
                 artist = song['track']['artists'][0]['name']
                 popularity = song['track']['popularity']
                 length = song['track']['duration_ms']
-                #f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+'\n')
+                release = song['track']['album']['release_date']
+                f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+', '+release[:4]+'\n')
                 
             start += 1
-            if (len((items['items'])) < 100):
+            if (len((items['items'])) < 50):
                 break       
 
-    f.close()   
+        f.close()       
+    allPlaylistSongs()
+
+    df = pd.read_csv('songs.csv', encoding="ISO-8859-1")
+    plt.figure(figsize=(10, 6))
+    sns.lineplot(x='Date', y='Value', data=df)
+    plt.xlabel('Date')
+    plt.ylabel('Value')
+    plt.title('Sample Seaborn Plot')
+
+    # Save the Seaborn plot to a BytesIO object
+    img_buf = BytesIO()
+    plt.savefig(img_buf, format='png')
+    img_buf.seek(0)
+    img_base64 = base64.b64encode(img_buf.read()).decode('utf-8')
+
+    # Render the HTML template with the base64-encoded image
+    return render_template('data.html', img_base64=img_base64)
+    
     
 def get_token():
     token_info = session.get(TOKEN_INFO, None)
