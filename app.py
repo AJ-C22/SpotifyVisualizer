@@ -137,7 +137,7 @@ def getTracks():
 
         filename = 'songs.csv'
         f = open(filename, 'a', encoding="utf-8")
-        headers = 'Name,Artist,Populatrity,Length,Release\n'
+        headers = 'Name,Artist,Popularity,Length,Release,Date_Added\n'
         f.write(headers)
 
         start=0
@@ -150,30 +150,60 @@ def getTracks():
                 popularity = song['track']['popularity']
                 length = song['track']['duration_ms']
                 release = song['track']['album']['release_date']
-                f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+', '+release[:4]+'\n')
+                added = song['added_at']
+                #maybe add followers
+                f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+', '+release[:4]+', '+added+'\n')
                 
             start += 1
             if (len((items['items'])) < 50):
                 break       
 
         f.close()       
+        
     allPlaylistSongs()
-
     df = pd.read_csv('songs.csv', encoding="ISO-8859-1")
-    plt.figure(figsize=(10, 6))
-    sns.lineplot(x='Date', y='Value', data=df)
-    plt.xlabel('Date')
-    plt.ylabel('Value')
+
+    sns.histplot( data=df, x='Popularity')
+    plt.xlabel('Popularity')
+    plt.ylabel('Count')
     plt.title('Sample Seaborn Plot')
 
     # Save the Seaborn plot to a BytesIO object
-    img_buf = BytesIO()
-    plt.savefig(img_buf, format='png')
-    img_buf.seek(0)
-    img_base64 = base64.b64encode(img_buf.read()).decode('utf-8')
+    popularity_hist_buf = BytesIO()
+    plt.savefig(popularity_hist_buf, format='png')
+    popularity_hist_buf.seek(0)
+    popularity_hist_base64 = base64.b64encode(popularity_hist_buf.read()).decode('utf-8')
+    plt.clf()
 
-    # Render the HTML template with the base64-encoded image
-    return render_template('data.html', img_base64=img_base64)
+    top_10_artists = df['Artist'].value_counts().nlargest(10)
+    sns.histplot(df[df['Artist'].isin(top_10_artists.index)], x='Artist')
+    plt.xlabel('Artists')
+    plt.ylabel('Count')
+    plt.title('Artist Seaborn Plot')
+
+    artists_buf = BytesIO()
+    plt.savefig(artists_buf, format='png')
+    artists_buf.seek(0)
+    artists_base64 = base64.b64encode(artists_buf.read()).decode('utf-8')
+    plt.clf()
+
+    sns.histplot(data=df, x='Release')
+    plt.xlabel('Years')
+    plt.ylabel('Count')
+    plt.title('Release Seaborn Plot')
+    
+    release_date_buf = BytesIO()
+    plt.savefig(release_date_buf, format='png')
+    release_date_buf.seek(0)
+    release_date_base64 = base64.b64encode(release_date_buf.read()).decode('utf-8')
+    plt.clf()
+
+    
+    return render_template('data.html', popularity_hist_base64=popularity_hist_base64 ,artists_base64=artists_base64, 
+                           release_date_base64=release_date_base64)
+    
+    
+    
     
     
 def get_token():
