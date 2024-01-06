@@ -122,10 +122,7 @@ def getTracks():
         playlists.append(playlist['id'])
 
     def msToMin(ms):
-        ms/60000
-        minutes= math.floor(ms/60000)
-        seconds = round(60*((ms/60000)-minutes))
-        return(str(minutes)+'min '+str(seconds)+'sec')
+        return(str(round(ms/60000, 2)))
         
     song_uris=[]
     #Use this: https://medium.com/analytics-vidhya/your-top-100-songs-2020-in-python-and-plotly-2e803d7e2990
@@ -152,7 +149,8 @@ def getTracks():
                 release = song['track']['album']['release_date']
                 added = song['added_at']
                 #maybe add followers
-                f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+', '+release[:4]+', '+added+'\n')
+                f.write(name+', '+artist+', '+str(popularity)+', '+msToMin(length)+', '+release[:4]+', '
+                        +added[:7]+'\n')
                 
             start += 1
             if (len((items['items'])) < 50):
@@ -198,9 +196,33 @@ def getTracks():
     release_date_base64 = base64.b64encode(release_date_buf.read()).decode('utf-8')
     plt.clf()
 
+    sns.scatterplot(data=df, x='Length', y='Popularity')
+    plt.xlabel('Song Length')
+    plt.ylabel('Popularity')
+    plt.title('Length vs Popularity Seaborn Plot')
+    
+    length_v_pop_buf = BytesIO()
+    plt.savefig(length_v_pop_buf, format='png')
+    length_v_pop_buf.seek(0)
+    length_v_pop_base64 = base64.b64encode(length_v_pop_buf.read()).decode('utf-8')
+    plt.clf()
+
+    sns.barplot(data=df[df['Artist'].isin(top_10_artists.index)], x='Artist', y='Length')
+    plt.xlabel('Artist')
+    plt.ylabel('Song Length')
+    plt.title('Length vs Popularity Seaborn Plot')
+    
+    artist_len_buf = BytesIO()
+    plt.savefig(artist_len_buf, format='png')
+    artist_len_buf.seek(0)
+    artist_len_base64 = base64.b64encode(artist_len_buf.read()).decode('utf-8')
+    plt.clf()
+
+
     
     return render_template('data.html', popularity_hist_base64=popularity_hist_base64 ,artists_base64=artists_base64, 
-                           release_date_base64=release_date_base64)
+                           release_date_base64=release_date_base64, length_v_pop_base64=length_v_pop_base64,
+                           artist_len_base64=artist_len_base64)
     
     
     

@@ -3,7 +3,7 @@
 <head>
 
     <script type="text/javascript" src = "{{ url_for('static', filename='script/script.js')}}"></script>
-    <!-- <link rel="stylesheet" href = "{{ url_for('static', filename='css/style.css')}}"> -->
+    <link rel="stylesheet" href = "{{ url_for('static', filename='css/data_style.css')}}">
 
 </head>
   
@@ -12,5 +12,8 @@
     <img src="data:image/png;base64,{{ popularity_hist_base64 }}" alt="Seaborn Plot">
     <img src="data:image/png;base64,{{ artists_base64 }}" alt="Seaborn Plot">
     <img src="data:image/png;base64,{{ release_date_base64 }}" alt="Seaborn Plot">
+    <img src="data:image/png;base64,{{ added_date_base64 }}" alt="Seaborn Plot">
+    <img src="data:image/png;base64,{{ length_v_pop_base64 }}" alt="Seaborn Plot">
+    <img src="data:image/png;base64,{{ artist_len_base64 }}" alt="Seaborn Plot">
     
 </body>
