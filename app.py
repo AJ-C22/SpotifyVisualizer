@@ -101,13 +101,8 @@ def critiquePage():
 
     return(render_template('critique.html', **locals()))
 
-
-
-
-
-
-
 @app.route('/getTracks')
+
 def getTracks():
     try:
         token_info = get_token()
@@ -161,6 +156,11 @@ def getTracks():
     allPlaylistSongs()
     df = pd.read_csv('songs.csv', encoding="ISO-8859-1")
 
+    top_10_artists = df['Artist'].value_counts().nlargest(10)
+    bottom_10_artists = df['Artist'].value_counts().nsmallest(10)
+    top_10_pop = df.nlargest(10, 'Popularity')
+    top_10_length = df.nlargest(10, 'Length')
+
     sns.histplot( data=df, x='Popularity')
     plt.xlabel('Popularity')
     plt.ylabel('Count')
@@ -173,16 +173,26 @@ def getTracks():
     popularity_hist_base64 = base64.b64encode(popularity_hist_buf.read()).decode('utf-8')
     plt.clf()
 
-    top_10_artists = df['Artist'].value_counts().nlargest(10)
     sns.histplot(df[df['Artist'].isin(top_10_artists.index)], x='Artist')
     plt.xlabel('Artists')
     plt.ylabel('Count')
-    plt.title('Artist Seaborn Plot')
+    plt.title('Top Artist Seaborn Plot')
 
     artists_buf = BytesIO()
     plt.savefig(artists_buf, format='png')
     artists_buf.seek(0)
     artists_base64 = base64.b64encode(artists_buf.read()).decode('utf-8')
+    plt.clf()
+
+    sns.histplot(df[df['Artist'].isin(bottom_10_artists.index)], x='Artist')
+    plt.xlabel('Artists')
+    plt.ylabel('Count')
+    plt.title('Bottom Artist Seaborn Plot')
+
+    bot_artists_buf = BytesIO()
+    plt.savefig(bot_artists_buf, format='png')
+    bot_artists_buf.seek(0)
+    bot_artists_base64 = base64.b64encode(bot_artists_buf.read()).decode('utf-8')
     plt.clf()
 
     sns.histplot(data=df, x='Release')
@@ -218,15 +228,43 @@ def getTracks():
     artist_len_base64 = base64.b64encode(artist_len_buf.read()).decode('utf-8')
     plt.clf()
 
-
+    sns.histplot(data=df, x="Date_Added")
+    plt.xlabel('Date Added')
+    plt.ylabel('Count')
+    plt.title('How Many Songs Added Per Month')
     
+    songs_added_buf = BytesIO()
+    plt.savefig(songs_added_buf, format='png')
+    songs_added_buf.seek(0)
+    songs_added_base64 = base64.b64encode(songs_added_buf.read()).decode('utf-8')
+    plt.clf()
+
+    sns.barplot(data=top_10_pop, x='Popularity', y='Name')
+    plt.xlabel('Song Name')
+    plt.ylabel('Popularity')
+    plt.title('Top 10 Most Popular Songs')
+    
+    song_pop_buf = BytesIO()
+    plt.savefig(song_pop_buf, format='png')
+    song_pop_buf.seek(0)
+    song_pop_base64 = base64.b64encode(song_pop_buf.read()).decode('utf-8')
+    plt.clf()
+
+    sns.barplot(data=top_10_length, x='Name', y='Length')
+    plt.xlabel('Song Name')
+    plt.ylabel('Length')
+    plt.title('Top 10 Longest Songs')
+    
+    song_len_buf = BytesIO()
+    plt.savefig(song_len_buf, format='png')
+    song_len_buf.seek(0)
+    song_len_base64 = base64.b64encode(song_len_buf.read()).decode('utf-8')
+    plt.clf()
+
     return render_template('data.html', popularity_hist_base64=popularity_hist_base64 ,artists_base64=artists_base64, 
                            release_date_base64=release_date_base64, length_v_pop_base64=length_v_pop_base64,
-                           artist_len_base64=artist_len_base64)
-    
-    
-    
-    
+                           artist_len_base64=artist_len_base64, songs_added_base64=songs_added_base64, song_pop_base64=song_pop_base64,
+                           bot_artists_base64=bot_artists_base64, song_len_base64=song_len_base64,)
     
 def get_token():
     token_info = session.get(TOKEN_INFO, None)
@@ -247,24 +285,51 @@ def create_spotify_oauth():
             scope = "user-library-read playlist-read-private playlist-read-collaborative")
 
 
-'''
+
 @app.route('/getGenres')
-    #genres = []
-def getGenres(playlist_id):
+   
+def getGenres():
+    try:
+        token_info = get_token()
+    except:
+        print("user not logged in")
+        return redirect("/")
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+    
+    start = 0
+    def allPlaylistGenres():
+        f = open('genres.csv', 'r+')
+        f.truncate(0)
+
+        filename = 'genres.csv'
+        f = open(filename, 'a', encoding="utf-8")
+        headers = 'Genre,Popularity,Length,Release\n'
+        f.write(headers)
+        
         start = 0
+
         while True:
-        items= sp.playlist_items(playlist_id, limit=100, offset=start*50)
-        for song in items['items']:
+            items = sp.current_user_saved_tracks(limit=50, offset=start*50)
+            for song in items['items']:
+                artist_id= song['track']['artists'][0]['id']
+                artist = sp.artist(artist_id)
+                try:
+                    genre= artist['genres'][0]
+                except:
+                    None
 
-            artist_id= song['track']['artists'][0]['id']
-            artist = sp.artist(artist_id)
-            genre= artist['genres']
-            try:
-                genres.append(str(genre[0]))
-            except:
-                None
+                popularity = song['track']['popularity']
+                length = song['track']['duration_ms']
+                release = song['track']['album']['release_date']
 
-        start += 1
-        if (len((items['items'])) < 100):
-            break
-'''
+                f.write(genre+','+str(popularity)+','+str(length)+','+str(release[:4])+'\n')
+            
+            start += 1
+            if (len((items['items'])) < 50):
+                break
+
+        f.close()      
+
+    allPlaylistGenres()
+    df = pd.read_csv('genres.csv', encoding="ISO-8859-1")
+    return (render_template('genre.html'))
