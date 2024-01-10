@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns 
 from io import BytesIO
 import base64
+from wordcloud import WordCloud
+import matplotlib.cm
+import matplotlib.colors
 
 
 app = Flask(__name__)
@@ -296,6 +299,9 @@ def getGenres():
         return redirect("/")
     sp = spotipy.Spotify(auth=token_info['access_token'])
     
+    def msToMin(ms):
+        return(str(round(ms/60000, 2)))
+    
     start = 0
     def allPlaylistGenres():
         f = open('genres.csv', 'r+')
@@ -322,7 +328,7 @@ def getGenres():
                 length = song['track']['duration_ms']
                 release = song['track']['album']['release_date']
 
-                f.write(genre+','+str(popularity)+','+str(length)+','+str(release[:4])+'\n')
+                f.write(genre+','+str(popularity)+','+str(msToMin(length))+','+str(release[:4])+'\n')
             
             start += 1
             if (len((items['items'])) < 50):
@@ -330,6 +336,48 @@ def getGenres():
 
         f.close()      
 
-    allPlaylistGenres()
+    #allPlaylistGenres()
     df = pd.read_csv('genres.csv', encoding="ISO-8859-1")
-    return (render_template('genre.html'))
+
+    genre_counts = df['Genre'].value_counts().nlargest(20)
+    genre_10 = df['Genre'].value_counts().nlargest(10)
+
+    plt.pie(genre_counts, labels=genre_counts.index)
+    plt.title('Top 20 Genres')
+    
+    genre_pie_buf = BytesIO()
+    plt.savefig(genre_pie_buf, format='png')
+    genre_pie_buf.seek(0)
+    genre_pie_base64 = base64.b64encode(genre_pie_buf.read()).decode('utf-8')
+    plt.clf()
+
+    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["lightgreen", "darkgreen", "limegreen"])
+    matplotlib.cm.register_cmap("my_map_22", cmap)
+    cpal = sns.color_palette("my_map_22", n_colors=64, desat=0.8)
+
+    sns.barplot(x=genre_counts.index, y=genre_counts.values, palette=cpal, width = 3, dodge = True)
+    plt.xticks(rotation=45, ha="right")
+    plt.title('Top 20 Genres')
+    
+    genre_hist_buf = BytesIO()
+    plt.savefig(genre_hist_buf, format='png')
+    genre_hist_buf.seek(0)
+    genre_hist_base64 = base64.b64encode(genre_hist_buf.read()).decode('utf-8')
+    plt.clf()
+
+    genre_counts_all = df['Genre'].value_counts()
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(genre_counts_all)
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+    plt.title('Word Cloud of Genres')
+
+    wordcloud_buf = BytesIO()
+    plt.savefig(wordcloud_buf, format='png')
+    wordcloud_buf.seek(0)
+    wordcloud_base64 = base64.b64encode(wordcloud_buf.read()).decode('utf-8')
+    plt.clf()
+
+    top_genre = most_common_result = df['Genre'].value_counts().idxmax()
+    
+    return render_template('genre.html', **locals())
