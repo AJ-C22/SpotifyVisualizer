@@ -423,8 +423,15 @@ def getGenres():
     genre_counts = df['Genre'].value_counts().nlargest(20)
     genre_10 = df['Genre'].value_counts().nlargest(10)
 
-    plt.pie(genre_counts, labels=genre_counts.index)
+    ax = plt.pie(genre_counts, labels=genre_counts.index)
     plt.title('Top 20 Genres')
+
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+
     
     genre_pie_buf = BytesIO()
     plt.savefig(genre_pie_buf, format='png')
@@ -436,22 +443,37 @@ def getGenres():
     matplotlib.cm.register_cmap("my_map_22", cmap)
     cpal = sns.color_palette("my_map_22", n_colors=64, desat=0.8)
 
-    sns.barplot(x=genre_counts.index, y=genre_counts.values, palette=cpal, width = 3, dodge = True)
-    plt.xticks(rotation=45, ha="right")
+    ax = sns.barplot(x=genre_counts.index, y=genre_counts.values, palette=cpal, width = 3, dodge = True)
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
     plt.title('Top 20 Genres')
     
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
+
     genre_hist_buf = BytesIO()
-    plt.savefig(genre_hist_buf, format='png')
+    plt.savefig(genre_hist_buf, format='png', bbox_inches = 'tight')
     genre_hist_buf.seek(0)
     genre_hist_base64 = base64.b64encode(genre_hist_buf.read()).decode('utf-8')
     plt.clf()
 
     genre_counts_all = df['Genre'].value_counts()
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(genre_counts_all)
+    ax = wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(genre_counts_all)
     plt.figure(figsize=(10, 5))
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis('off')
     plt.title('Word Cloud of Genres')
+
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+
 
     wordcloud_buf = BytesIO()
     plt.savefig(wordcloud_buf, format='png')
