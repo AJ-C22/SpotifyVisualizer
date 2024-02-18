@@ -211,7 +211,14 @@ def getTracks():
     plt.xlabel('Artists')
     plt.ylabel('Count')
     plt.title('Bottom Artist Seaborn Plot')
-    
+
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
 
     bot_artists_buf = BytesIO()
     plt.savefig(bot_artists_buf, format='png', bbox_inches="tight")
@@ -219,22 +226,38 @@ def getTracks():
     bot_artists_base64 = base64.b64encode(bot_artists_buf.read()).decode('utf-8')
     plt.clf()
 
-    sns.histplot(data=df, x='Release')
+    ax = sns.histplot(data=df, x='Release')
     plt.xlabel('Years')
     plt.ylabel('Count')
     plt.title('Release Seaborn Plot')
     
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
+
     release_date_buf = BytesIO()
     plt.savefig(release_date_buf, format='png', bbox_inches='tight')
     release_date_buf.seek(0)
     release_date_base64 = base64.b64encode(release_date_buf.read()).decode('utf-8')
     plt.clf()
 
-    sns.scatterplot(data=df, x='Length', y='Popularity')
+    ax = sns.scatterplot(data=df, x='Length', y='Popularity')
     plt.xlabel('Song Length')
     plt.ylabel('Popularity')
     plt.title('Length vs Popularity Seaborn Plot')
     
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
+
     length_v_pop_buf = BytesIO()
     plt.savefig(length_v_pop_buf, format='png', bbox_inches='tight')
     length_v_pop_buf.seek(0)
@@ -246,6 +269,14 @@ def getTracks():
     plt.xlabel('Artist')
     plt.ylabel('Song Length')
     plt.title('Length vs Artist Seaborn Plot')
+
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
     
     artist_len_buf = BytesIO()
     plt.savefig(artist_len_buf, format='png', bbox_inches='tight')
@@ -253,10 +284,18 @@ def getTracks():
     artist_len_base64 = base64.b64encode(artist_len_buf.read()).decode('utf-8')
     plt.clf()
 
-    sns.histplot(data=df, x="Date_Added",)
+    ax = sns.histplot(data=df, x="Date_Added",)
     plt.xlabel('Date Added')
     plt.ylabel('Count')
     plt.title('How Many Songs Added Per Month')
+
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
     
     songs_added_buf = BytesIO()
     plt.savefig(songs_added_buf, format='png', bbox_inches="tight")
@@ -264,10 +303,18 @@ def getTracks():
     songs_added_base64 = base64.b64encode(songs_added_buf.read()).decode('utf-8')
     plt.clf()
 
-    sns.barplot(data=top_10_pop, x='Popularity', y='Name')
-    plt.xlabel('Song Name')
-    plt.ylabel('Popularity')
+    ax = sns.barplot(data=top_10_pop, x='Popularity', y='Name')
+    plt.xlabel('Popularity')
+    plt.ylabel('Song Name')
     plt.title('Top 10 Most Popular Songs')
+
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
     
     song_pop_buf = BytesIO()
     plt.savefig(song_pop_buf, format='png', bbox_inches="tight")
@@ -280,6 +327,14 @@ def getTracks():
     plt.xlabel('Song Name')
     plt.ylabel('Length')
     plt.title('Top 10 Longest Songs')
+
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
     
     song_len_buf = BytesIO()
     plt.savefig(song_len_buf, format='png', bbox_inches="tight")

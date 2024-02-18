@@ -1,6 +1,6 @@
 Name,Artist,Popularity,Length,Release,Date_Added
 Titanium (feat. Sia), David Guetta, 61, 4.08, 2011, 2023-12
-Hysteria, Muse, 50, 3.79, 2004, 2023-12
+Hysteria, Muse, 49, 3.79, 2004, 2023-12
 Tippa My Tongue, Red Hot Chili Peppers, 59, 4.35, 2022, 2023-12
 Peace and Love, Red Hot Chili Peppers, 59, 4.05, 2022, 2023-12
 Reach Out, Red Hot Chili Peppers, 52, 4.19, 2022, 2023-12
@@ -8,7 +8,7 @@ Eddie, Red Hot Chili Peppers, 62, 5.7, 2022, 2023-12
 Fake as Fu@k, Red Hot Chili Peppers, 58, 4.37, 2022, 2023-12
 Bella, Red Hot Chili Peppers, 53, 4.86, 2022, 2023-12
 Roulette, Red Hot Chili Peppers, 50, 4.95, 2022, 2023-12
-My Cigarette, Red Hot Chili Peppers, 48, 4.4, 2022, 2023-12
+My Cigarette, Red Hot Chili Peppers, 49, 4.4, 2022, 2023-12
 Afterlife, Red Hot Chili Peppers, 49, 4.24, 2022, 2023-12
 Shoot Me a Smile, Red Hot Chili Peppers, 48, 3.71, 2022, 2023-12
 Handful, Red Hot Chili Peppers, 47, 4.0, 2022, 2023-12
@@ -69,9 +69,9 @@ I Don't Trust Myself (With Loving You), John Mayer, 59, 4.87, 2006, 2023-12
 Paparazzi, Lady Gaga, 76, 3.47, 2008, 2023-12
 Passionfruit, Drake, 88, 4.98, 2017, 2023-12
 Say It Ain't So, Weezer, 79, 4.31, 1994, 2023-12
-Tides (feat. AJ Tracey & Rich The Kid), KSI, 8, 3.39, 2020, 2023-12
+Tides (feat. AJ Tracey & Rich The Kid), KSI, 7, 3.39, 2020, 2023-12
 Gorgeous, Kanye West, 75, 5.96, 2010, 2023-12
-Can I Get It, Adele, 73, 3.51, 2021, 2023-12
+Can I Get It, Adele, 74, 3.51, 2021, 2023-12
 Day in the Life, Central Cee, 55, 3.14, 2020, 2023-12
 Black Hole Sun, Soundgarden, 81, 5.31, 1994, 2023-12
 Maps, Maroon 5, 88, 3.17, 2014, 2023-12
@@ -124,7 +124,7 @@ Anxious, AJ Tracey, 49, 2.68, 2021, 2023-12
 Eurostep, AJ Tracey, 46, 2.75, 2021, 2023-12
 Top Dog, AJ Tracey, 41, 3.33, 2021, 2023-12
 Summertime Shootout (feat. T-Pain), AJ Tracey, 45, 3.65, 2021, 2023-12
-Stereo Hearts (feat. Adam Levine), Gym Class Heroes, 83, 3.52, 2011, 2023-12
+Stereo Hearts (feat. Adam Levine), Gym Class Heroes, 84, 3.52, 2011, 2023-12
 Sacrifice, The Weeknd, 76, 3.15, 2022, 2023-12
 Stuck on the puzzle, Alex Turner, 2, 3.52, 2011, 2023-12
 One More Night, Maroon 5, 75, 3.66, 2012, 2023-12
@@ -168,13 +168,13 @@ The Way It Is, The Strokes, 52, 2.36, 2003, 2023-12
 The End Has No End, The Strokes, 57, 3.09, 2003, 2023-12
 I Can't Win, The Strokes, 59, 2.7, 2003, 2023-12
 First Love/Late Spring, Mitski, 82, 4.64, 2014, 2023-12
-Umbrella, Rihanna, 86, 4.6, 2008, 2023-12
+Umbrella, Rihanna, 87, 4.6, 2008, 2023-12
 Triumph, J Hus, 50, 2.84, 2020, 2023-12
 Superstition, Stevie Wonder, 70, 4.44, 1972, 2023-12
 Knife Talk (with 21 Savage ft. Project Pat), Drake, 83, 4.05, 2021, 2023-12
 Tea for Two, Albert Hammond Jr, 43, 4.14, 2018, 2023-12
 Back to Basics, Fredo, 39, 3.29, 2021, 2023-12
-Gang Gang (feat. JAY1 & Deno), KSI, 19, 2.73, 2021, 2023-12
+Gang Gang (feat. JAY1 & Deno), KSI, 18, 2.73, 2021, 2023-12
 Away & Anywhere, John Frusciante, 40, 4.1, 2001, 2023-12
 Moments Have You, John Frusciante, 32, 3.49, 2001, 2023-12
 Ride, Twenty One Pilots, 85, 3.58, 2015, 2023-12
@@ -314,7 +314,7 @@ Tear, Red Hot Chili Peppers, 51, 5.28, 2002, 2023-12
 On Mercury, Red Hot Chili Peppers, 51, 3.46, 2002, 2023-12
 Minor Thing, Red Hot Chili Peppers, 52, 3.62, 2002, 2023-12
 Warm Tape, Red Hot Chili Peppers, 47, 4.27, 2002, 2023-12
-Venice Queen, Red Hot Chili Peppers, 54, 6.12, 2002, 2023-12
+Venice Queen, Red Hot Chili Peppers, 55, 6.12, 2002, 2023-12
 Bicycle Song - 2006 Remaster, Red Hot Chili Peppers, 49, 3.39, 2002, 2023-12
 Bouff Daddy, J Hus, 61, 3.42, 2017, 2023-12
 Did You See, J Hus, 70, 3.02, 2017, 2023-12
@@ -358,10 +358,10 @@ U Know (feat. Kush), Abra Cadabra, 39, 3.67, 2021, 2023-12
 Creepin' (with The Weeknd & 21 Savage), Metro Boomin, 91, 3.69, 2022, 2023-12
 Feel So Close - Radio Edit, Calvin Harris, 85, 3.44, 2012, 2023-12
 Watermelon Sugar, Harry Styles, 89, 2.9, 2019, 2023-12
-Dani California, Red Hot Chili Peppers, 82, 4.7, 2006, 2023-12
+Dani California, Red Hot Chili Peppers, 83, 4.7, 2006, 2023-12
 Snow (Hey Oh), Red Hot Chili Peppers, 83, 5.58, 2006, 2023-12
 Charlie, Red Hot Chili Peppers, 61, 4.63, 2006, 2023-12
-Stadium Arcadium, Red Hot Chili Peppers, 63, 5.25, 2006, 2023-12
+Stadium Arcadium, Red Hot Chili Peppers, 64, 5.25, 2006, 2023-12
 Hump de Bump, Red Hot Chili Peppers, 59, 3.55, 2006, 2023-12
 She's Only 18, Red Hot Chili Peppers, 58, 3.42, 2006, 2023-12
 Slow Cheetah, Red Hot Chili Peppers, 59, 5.33, 2006, 2023-12

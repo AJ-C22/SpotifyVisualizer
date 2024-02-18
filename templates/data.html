@@ -5,98 +5,132 @@
     <script type="text/javascript" src = "{{ url_for('static', filename='script/script.js')}}"></script>
     <link rel="stylesheet" href = "{{ url_for('static', filename='css/data_style.css')}}">
     <style>
-        body {
-            background-color: #1E1E1E;
-            color: #FFFFFF;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-        header {
-            background-color: #333333;
-            padding: 15px;
-            text-align: center;
-        }
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
 
-        main {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-        }
+body {
+    
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+span{
+    color: rgb(128, 209, 128);
+}
+header {
 
-        h2 {
-            color: #FFFFFF;
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
+    padding: 5rem;
+    text-align: left;
+    font-size: 3rem;
+    padding-left: 5%;
+}
+
+main {
+    padding-left: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+h2 {
+    padding-left: 5%;
+    color: #FFFFFF;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.graph-container {
+    background-color: #333333;
+    border-radius: 8px;
+    margin: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: .45s;
+    object-fit: contain;
+}
+.graph-container:hover{
+    transform: translateY(6px);
+    background: rgb(128, 209, 128) ;
+
+}
+
+body {
+	background: linear-gradient(-45deg,rgb(32, 32, 32), rgb(24, 26, 26), #252222, #0a1f0d);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
     </style>
 </head>
   
 <body>
+
     <header>
-        <h1>Seaborn Plot from Pandas DataFrame</h1>
+        <h1><span>Data</span> Visualizations</h1>
     </header>
 
     <main>
         <div class="graph-container">
-            <h2>Graph 1</h2>
             <img src="data:image/png;base64,{{ popularity_hist_base64 }}" alt="Seaborn Plot">
         </div>
 
         <div class="graph-container">
-            <h2>Graph 2</h2>
             <img src="data:image/png;base64,{{ artists_base64 }}" alt="Seaborn Plot">
         </div>
 
         <div class="graph-container">
-            <h2>Graph 1</h2>
             <img src="data:image/png;base64,{{ bot_artists_base64 }}" alt="Seaborn Plot">
         </div>
 
         <div class="graph-container">
-            <h2>Graph 2</h2>
             <img src="data:image/png;base64,{{ release_date_base64 }}" alt="Seaborn Plot">
         </div>
 
         <div class="graph-container">
-            <h2>Graph 1</h2>
             <img src="data:image/png;base64,{{ length_v_pop_base64 }}" alt="Seaborn Plot">
         </div>
 
         <div class="graph-container">
-            <h2>Graph 2</h2>
             <img src="data:image/png;base64,{{ artist_len_base64 }}" alt="Seaborn Plot">
         </div>
 
         <div class="graph-container">
-            <h2>Graph 2</h2>
             <img src="data:image/png;base64,{{ songs_added_base64 }}" alt="Seaborn Plot">
         </div>
 
         <div class="graph-container">
-            <h2>Graph 2</h2>
             <img src="data:image/png;base64,{{ song_pop_base64 }}" alt="Seaborn Plot">
         </div>
 
         <div class="graph-container">
-            <h2>Graph 2</h2>
             <img src="data:image/png;base64,{{ song_len_base64 }}" alt="Seaborn Plot">
         </div>
 
     </main>
     
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 </body>
