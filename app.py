@@ -5,7 +5,9 @@ import time
 import sys
 import pandas as pd
 import math
+import matplotlib
 import matplotlib.pyplot as plt 
+matplotlib.use('Agg')
 import seaborn as sns 
 from io import BytesIO
 import base64
@@ -181,7 +183,7 @@ def getTracks():
 
     # Save the Seaborn plot to a BytesIO object
     popularity_hist_buf = BytesIO()
-    plt.savefig(popularity_hist_buf, format='png')
+    plt.savefig(popularity_hist_buf, format='png', bbox_inches="tight")
     popularity_hist_buf.seek(0)
     popularity_hist_base64 = base64.b64encode(popularity_hist_buf.read()).decode('utf-8')
     plt.clf()
