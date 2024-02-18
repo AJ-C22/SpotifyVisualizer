@@ -164,10 +164,20 @@ def getTracks():
     top_10_pop = df.nlargest(10, 'Popularity')
     top_10_length = df.nlargest(10, 'Length')
 
-    sns.histplot( data=df, x='Popularity')
+    
+
+    ax = sns.histplot( data=df, x='Popularity')
     plt.xlabel('Popularity')
     plt.ylabel('Count')
     plt.title('Sample Seaborn Plot')
+
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
 
     # Save the Seaborn plot to a BytesIO object
     popularity_hist_buf = BytesIO()
@@ -182,6 +192,14 @@ def getTracks():
     plt.ylabel('Count')
     plt.title('Top Artist Seaborn Plot')
 
+    fig = plt.gcf()
+    fig.patch.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+
+    # Access the Axes and set its background color to be transparent
+    ax.patch.set_facecolor('none')
+    ax.patch.set_alpha(0.0)
+
     artists_buf = BytesIO()
     plt.savefig(artists_buf, format='png', bbox_inches="tight")
     artists_buf.seek(0)
@@ -193,6 +211,7 @@ def getTracks():
     plt.xlabel('Artists')
     plt.ylabel('Count')
     plt.title('Bottom Artist Seaborn Plot')
+    
 
     bot_artists_buf = BytesIO()
     plt.savefig(bot_artists_buf, format='png', bbox_inches="tight")
@@ -268,6 +287,7 @@ def getTracks():
     song_len_base64 = base64.b64encode(song_len_buf.read()).decode('utf-8')
     plt.clf()
 
+    
     return render_template('data.html', popularity_hist_base64=popularity_hist_base64 ,artists_base64=artists_base64, 
                            release_date_base64=release_date_base64, length_v_pop_base64=length_v_pop_base64,
                            artist_len_base64=artist_len_base64, songs_added_base64=songs_added_base64, song_pop_base64=song_pop_base64,
