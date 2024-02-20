@@ -25,7 +25,7 @@ app.secret_key = "abcdefg"
 app.config['Session_Cookie_Name'] = "Ajai's Cookie"
 TOKEN_INFO = "token_info"
 
-@app.route('/callback')
+@app.route('/')
 def login():
     sp_oauth =  create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
