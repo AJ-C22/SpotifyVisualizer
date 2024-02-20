@@ -1,13 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href = "website_tester.css">
+    <style>
+        h2 span{
+                animation: blinker 2s linear infinite;
+            }
 
-    <script type="text/javascript" src = "{{ url_for('static', filename='script/script.js')}}"></script>
-    <!-- <link rel="stylesheet" href = "{{ url_for('static', filename='css/style.css')}}"> -->
+        @keyframes blinker{
+                50%{
+                    opacity: 0;
+                }
+            }
+    *{
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
 
+    body {
+    
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+}
+
+    body{
+	background: linear-gradient(-45deg,rgb(32, 32, 32), rgb(24, 26, 26), #252222, #0a1f0d, #2d5c34);
+	background-size: 400% 800%;
+	animation: gradient 15s ease infinite;
+}
+
+    @keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+    }
+
+    h2 {
+        color: rgb(186, 228, 191);
+        padding-top: 5rem;
+        padding-left: 10%;
+    }
+
+    
+
+
+    </style>
 </head>
   
 <body>
-    <h1>Avg popularity scores of your songs is: {{avg_pop}}</h1>
-    <h2>You share {{same_artists}} artists with the Billboard Hot 100</h2>
+    <h2 id = "message1"></h2>
+    <h2 id = "message2"></h2>
+     
+        <script>
+            var delay = 3000;
+            var messageArray = ["The average popularity scores of your songs is: {{avg_pop}}"];
+            var messageArray2 = ["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n You share {{same_artists}} artists with the Billboard Hot 100"];
+            var textPosition = 0;
+            var speed = 80;
+            var speed2 =100;
+            typewriter = () => {
+                document.querySelector('#message1').
+                innerHTML = messageArray[0].substring(0,textPosition) + "<span>\u25ae</span>"
+    
+                if (textPosition++ != messageArray[0].length)
+                    setTimeout(typewriter, speed);
+            }
+            typewriter2 = () => {
+                document.querySelector('#message2').
+                innerHTML = messageArray2[0].substring(0,textPosition) + "<span>\u25ae</span>"
+    
+                if (textPosition++ != messageArray2[0].length)
+                    setTimeout(typewriter2, speed2);
+            }
+    
+            window.addEventListener("load", typewriter)
+            window.addEventListener("load", typewriter2)
+            
+
+        </script>
 </body>

@@ -37,7 +37,7 @@ span{
 }
 .button-box{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);/** change to 4 when top points is added **/
     grid-template-rows: 1fr;
     padding-top: 6%;
     column-gap: 30px;

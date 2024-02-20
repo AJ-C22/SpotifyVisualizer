@@ -166,9 +166,12 @@ def getTracks():
     top_10_pop = df.nlargest(10, 'Popularity')
     top_10_length = df.nlargest(10, 'Length')
 
+    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["lightgreen", "darkgreen", "limegreen"])
+    matplotlib.cm.register_cmap("my_map_22222222222222222222222222222222222222222222882&&&&&&&", cmap)
+    cpal = sns.color_palette("my_map_22222222222222222222222222222222222222222222882&&&&&&&", n_colors=64, desat=0.8)
     
-
-    ax = sns.histplot( data=df, x='Popularity')
+    sns.set(style="whitegrid")
+    ax = sns.histplot( data=df, x='Popularity', color="lightgreen", alpha=1.0)
     plt.xlabel('Popularity')
     plt.ylabel('Count')
     plt.title('Sample Seaborn Plot')
@@ -180,6 +183,11 @@ def getTracks():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
+    ax.set_title('Popularity of all Songs', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
 
     # Save the Seaborn plot to a BytesIO object
     popularity_hist_buf = BytesIO()
@@ -188,7 +196,7 @@ def getTracks():
     popularity_hist_base64 = base64.b64encode(popularity_hist_buf.read()).decode('utf-8')
     plt.clf()
 
-    ax = sns.histplot(df[df['Artist'].isin(top_10_artists.index)], x='Artist')
+    ax = sns.histplot(df[df['Artist'].isin(top_10_artists.index)], x='Artist', color="lightgreen", alpha=1.0)
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
     plt.xlabel('Artists')
     plt.ylabel('Count')
@@ -201,6 +209,11 @@ def getTracks():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
+    ax.set_title('Song Distribution of Top 10 Artists', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
 
     artists_buf = BytesIO()
     plt.savefig(artists_buf, format='png', bbox_inches="tight")
@@ -208,7 +221,7 @@ def getTracks():
     artists_base64 = base64.b64encode(artists_buf.read()).decode('utf-8')
     plt.clf()
 
-    ax = sns.histplot(df[df['Artist'].isin(bottom_10_artists.index)], x='Artist')
+    ax = sns.histplot(df[df['Artist'].isin(bottom_10_artists.index)], x='Artist', color="lightgreen", alpha=1.0)
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
     plt.xlabel('Artists')
     plt.ylabel('Count')
@@ -221,6 +234,11 @@ def getTracks():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
+    ax.set_title('Song Distribution of Bottom 10 Artists', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
 
     bot_artists_buf = BytesIO()
     plt.savefig(bot_artists_buf, format='png', bbox_inches="tight")
@@ -228,7 +246,7 @@ def getTracks():
     bot_artists_base64 = base64.b64encode(bot_artists_buf.read()).decode('utf-8')
     plt.clf()
 
-    ax = sns.histplot(data=df, x='Release')
+    ax = sns.histplot(data=df, x='Release', color="lightgreen", alpha=1.0)
     plt.xlabel('Years')
     plt.ylabel('Count')
     plt.title('Release Seaborn Plot')
@@ -240,6 +258,11 @@ def getTracks():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
+    ax.set_title('Distribution of All Song Release Dates', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
 
     release_date_buf = BytesIO()
     plt.savefig(release_date_buf, format='png', bbox_inches='tight')
@@ -247,7 +270,7 @@ def getTracks():
     release_date_base64 = base64.b64encode(release_date_buf.read()).decode('utf-8')
     plt.clf()
 
-    ax = sns.scatterplot(data=df, x='Length', y='Popularity')
+    ax = sns.scatterplot(data=df, x='Length', y='Popularity', color="lightgreen", alpha=1.0)
     plt.xlabel('Song Length')
     plt.ylabel('Popularity')
     plt.title('Length vs Popularity Seaborn Plot')
@@ -259,6 +282,11 @@ def getTracks():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
+    ax.set_title('Song length vs Popularity', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
 
     length_v_pop_buf = BytesIO()
     plt.savefig(length_v_pop_buf, format='png', bbox_inches='tight')
@@ -279,6 +307,11 @@ def getTracks():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
+    ax.set_title('Average Song Lengths of Top 10 Artists', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
     
     artist_len_buf = BytesIO()
     plt.savefig(artist_len_buf, format='png', bbox_inches='tight')
@@ -286,7 +319,7 @@ def getTracks():
     artist_len_base64 = base64.b64encode(artist_len_buf.read()).decode('utf-8')
     plt.clf()
 
-    ax = sns.histplot(data=df, x="Date_Added",)
+    ax = sns.histplot(data=df, x="Date_Added", color="lightgreen", alpha=1.0)
     plt.xlabel('Date Added')
     plt.ylabel('Count')
     plt.title('How Many Songs Added Per Month')
@@ -298,6 +331,11 @@ def getTracks():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
+    ax.set_title('Distribution of Dates - Songs Added', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
     
     songs_added_buf = BytesIO()
     plt.savefig(songs_added_buf, format='png', bbox_inches="tight")
@@ -305,6 +343,7 @@ def getTracks():
     songs_added_base64 = base64.b64encode(songs_added_buf.read()).decode('utf-8')
     plt.clf()
 
+    
     ax = sns.barplot(data=top_10_pop, x='Popularity', y='Name')
     plt.xlabel('Popularity')
     plt.ylabel('Song Name')
@@ -317,6 +356,11 @@ def getTracks():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
+    ax.set_title('Top 10 Most Popular Artists', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
     
     song_pop_buf = BytesIO()
     plt.savefig(song_pop_buf, format='png', bbox_inches="tight")
@@ -324,6 +368,7 @@ def getTracks():
     song_pop_base64 = base64.b64encode(song_pop_buf.read()).decode('utf-8')
     plt.clf()
 
+    sns.set(style="whitegrid")
     ax = sns.barplot(data=top_10_length, x='Name', y='Length')
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
     plt.xlabel('Song Name')
@@ -337,7 +382,12 @@ def getTracks():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
-    
+    ax.set_title('Top 10 Longest Songs', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+
     song_len_buf = BytesIO()
     plt.savefig(song_len_buf, format='png', bbox_inches="tight")
     song_len_buf.seek(0)
@@ -419,7 +469,7 @@ def getGenres():
 
     #allPlaylistGenres()
     df = pd.read_csv('genres.csv', encoding="ISO-8859-1")
-
+    sns.set(style="whitegrid")
     cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["lightgreen", "darkgreen", "limegreen"])
     matplotlib.cm.register_cmap("my_map_222222222222222222222222222222222222222222222&&&&&&&", cmap)
     cpal = sns.color_palette("my_map_222222222222222222222222222222222222222222222&&&&&&&", n_colors=64, desat=0.8)
@@ -427,9 +477,20 @@ def getGenres():
     genre_counts = df['Genre'].value_counts().nlargest(20)
     genre_10 = df['Genre'].value_counts().nlargest(10)
 
-    ax = plt.pie(genre_10, labels=genre_10.index, colors=sns.color_palette("Greens"))
+    plt.pie(genre_10, labels=genre_10.index, colors=sns.color_palette("Greens"), textprops={'color': 'white'})
     plt.title('Top 10 Genres')
 
+    ax = plt.gca()
+
+    # Set the color of the labels to white
+    label_color = 'white'
+    for label in ax.get_xticklabels() + ax.get_yticklabels():
+        label.set_color(label_color)
+
+    # Set the color of the ticks to white
+    ax.tick_params(axis='x', colors=label_color)
+    ax.tick_params(axis='y', colors=label_color)
+    ax.set_title('Top 10 Genres', color='white', fontsize=16)
     fig = plt.gcf()
     fig.patch.set_facecolor('none')
     fig.patch.set_alpha(0.0)
@@ -454,6 +515,11 @@ def getGenres():
     # Access the Axes and set its background color to be transparent
     ax.patch.set_facecolor('none')
     ax.patch.set_alpha(0.0)
+    ax.set_title('Top 20 genres', color='white', fontsize=16)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
 
     genre_hist_buf = BytesIO()
     plt.savefig(genre_hist_buf, format='png', bbox_inches = 'tight')
@@ -462,7 +528,7 @@ def getGenres():
     plt.clf()
 
     genre_counts_all = df['Genre'].value_counts()
-    ax = wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(genre_counts_all)
+    ax = wordcloud = WordCloud(width=800, height=400, background_color=None).generate_from_frequencies(genre_counts_all)
     plt.figure(figsize=(10, 5))
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis('off')
