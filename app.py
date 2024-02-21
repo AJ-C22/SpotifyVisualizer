@@ -25,13 +25,13 @@ app.secret_key = "abcdefg"
 app.config['Session_Cookie_Name'] = "Ajai's Cookie"
 TOKEN_INFO = "token_info"
 
-@app.route('/')
+@app.route('/redirect')
 def login():
     sp_oauth =  create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
 
-@app.route('/redirect')
+@app.route('/redirect2')
 def redirectPage():
     sp_oauth =  create_spotify_oauth()
     session.clear()
