@@ -165,10 +165,6 @@ def getTracks():
     bottom_10_artists = df['Artist'].value_counts().nsmallest(10)
     top_10_pop = df.nlargest(10, 'Popularity')
     top_10_length = df.nlargest(10, 'Length')
-
-    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["lightgreen", "darkgreen", "limegreen"])
-    matplotlib.cm.register_cmap("my_map_22222222222222222222222222222222222222222222882&&&&&&&", cmap)
-    cpal = sns.color_palette("my_map_22222222222222222222222222222222222222222222882&&&&&&&", n_colors=64, desat=0.8)
     
     sns.set(style="whitegrid")
     ax = sns.histplot( data=df, x='Popularity', color="lightgreen", alpha=1.0)
@@ -470,9 +466,6 @@ def getGenres():
     #allPlaylistGenres()
     df = pd.read_csv('genres.csv', encoding="ISO-8859-1")
     sns.set(style="whitegrid")
-    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["lightgreen", "darkgreen", "limegreen"])
-    matplotlib.cm.register_cmap("my_map_222222222222222222222222222222222222222222222&&&&&&&", cmap)
-    cpal = sns.color_palette("my_map_222222222222222222222222222222222222222222222&&&&&&&", n_colors=64, desat=0.8)
 
     genre_counts = df['Genre'].value_counts().nlargest(20)
     genre_10 = df['Genre'].value_counts().nlargest(10)
@@ -504,7 +497,7 @@ def getGenres():
     genre_pie_base64 = base64.b64encode(genre_pie_buf.read()).decode('utf-8')
     plt.clf()
 
-    ax = sns.barplot(x=genre_counts.index, y=genre_counts.values, palette=cpal)
+    ax = sns.barplot(x=genre_counts.index, y=genre_counts.values)
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
     plt.title('Top 20 Genres')
     
