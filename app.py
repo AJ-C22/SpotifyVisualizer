@@ -324,6 +324,7 @@ def getTracks():
     plt.clf()
 
     ax = sns.histplot(data=df, x="Date_Added", color="lightgreen", alpha=1.0)
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
     plt.xlabel('Date Added')
     plt.ylabel('Count')
     plt.title('How Many Songs Added Per Month')
