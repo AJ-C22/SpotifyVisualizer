@@ -168,7 +168,7 @@ def getTracks():
         f.close()       
         
     allPlaylistSongs()
-    df = pd.read_csv('songs.csv', encoding="ISO-8859-1")
+    df = pd.read_csv('songs.csv', encoding="ISO-8859-1", on_bad_lines='skip')
 
     top_10_artists = df['Artist'].value_counts().nlargest(10)
     bottom_10_artists = df['Artist'].value_counts().nsmallest(10)
