@@ -1,10 +1,10 @@
 Name,Artist,Popularity,Length,Release,Date_Added
 Titanium (feat. Sia), David Guetta, 61, 4.08, 2011, 2023-12
-Hysteria, Muse, 49, 3.79, 2004, 2023-12
+Hysteria, Muse, 48, 3.79, 2004, 2023-12
 Tippa My Tongue, Red Hot Chili Peppers, 59, 4.35, 2022, 2023-12
 Peace and Love, Red Hot Chili Peppers, 59, 4.05, 2022, 2023-12
 Reach Out, Red Hot Chili Peppers, 52, 4.19, 2022, 2023-12
-Eddie, Red Hot Chili Peppers, 62, 5.7, 2022, 2023-12
+Eddie, Red Hot Chili Peppers, 61, 5.7, 2022, 2023-12
 Fake as Fu@k, Red Hot Chili Peppers, 58, 4.37, 2022, 2023-12
 Bella, Red Hot Chili Peppers, 53, 4.86, 2022, 2023-12
 Roulette, Red Hot Chili Peppers, 50, 4.95, 2022, 2023-12
@@ -59,7 +59,7 @@ Knives Out, Radiohead, 64, 4.25, 2001, 2023-12
 Unchanging, John Frusciante, 24, 3.9, 2004, 2023-12
 The Will To Death, John Frusciante, 39, 3.81, 2004, 2023-12
 In The Heat Of The Morning, The Last Shadow Puppets, 55, 2.69, 2008, 2023-12
-Drag Queen, The Strokes, 45, 4.56, 2016, 2023-12
+Drag Queen, The Strokes, 46, 4.56, 2016, 2023-12
 Oblivius, The Strokes, 58, 4.99, 2016, 2023-12
 Threat of Joy, The Strokes, 61, 4.41, 2016, 2023-12
 The Man Who Sold The World - Live, Nirvana, 79, 4.35, 1994, 2023-12
@@ -118,7 +118,7 @@ Trap Queen, Fetty Wap, 78, 3.7, 2015, 2023-12
 679 (feat. Monty), Fetty Wap, 64, 3.12, 2015, 2023-12
 Drive, Incubus, 80, 3.87, 1999, 2023-12
 Catch My Death, Red Hot Chili Peppers, 33, 4.27, 2013, 2023-12
-How It Ends, Red Hot Chili Peppers, 32, 3.64, 2013, 2023-12
+How It Ends, Red Hot Chili Peppers, 33, 3.64, 2013, 2023-12
 Someday, The Strokes, 71, 3.06, 2001, 2023-12
 Anxious, AJ Tracey, 49, 2.68, 2021, 2023-12
 Eurostep, AJ Tracey, 46, 2.75, 2021, 2023-12
@@ -174,7 +174,7 @@ Superstition, Stevie Wonder, 70, 4.44, 1972, 2023-12
 Knife Talk (with 21 Savage ft. Project Pat), Drake, 83, 4.05, 2021, 2023-12
 Tea for Two, Albert Hammond Jr, 43, 4.14, 2018, 2023-12
 Back to Basics, Fredo, 39, 3.29, 2021, 2023-12
-Gang Gang (feat. JAY1 & Deno), KSI, 18, 2.73, 2021, 2023-12
+Gang Gang (feat. JAY1 & Deno), KSI, 17, 2.73, 2021, 2023-12
 Away & Anywhere, John Frusciante, 40, 4.1, 2001, 2023-12
 Moments Have You, John Frusciante, 32, 3.49, 2001, 2023-12
 Ride, Twenty One Pilots, 85, 3.58, 2015, 2023-12
@@ -193,9 +193,9 @@ Dark Necessities, Red Hot Chili Peppers, 76, 5.03, 2016, 2023-12
 The Longest Wave, Red Hot Chili Peppers, 62, 3.53, 2016, 2023-12
 Goodbye Angels, Red Hot Chili Peppers, 63, 4.48, 2016, 2023-12
 Sick Love, Red Hot Chili Peppers, 69, 3.69, 2016, 2023-12
-Go Robot, Red Hot Chili Peppers, 62, 4.4, 2016, 2023-12
+Go Robot, Red Hot Chili Peppers, 63, 4.4, 2016, 2023-12
 Feasting on the Flowers, Red Hot Chili Peppers, 53, 3.38, 2016, 2023-12
-Detroit, Red Hot Chili Peppers, 49, 3.78, 2016, 2023-12
+Detroit, Red Hot Chili Peppers, 50, 3.78, 2016, 2023-12
 Encore, Red Hot Chili Peppers, 55, 4.25, 2016, 2023-12
 Funny Face, Red Hot Chili Peppers, 40, 4.77, 2006, 2023-12
 I'll Be Your Domino, Red Hot Chili Peppers, 33, 3.91, 2006, 2023-12
@@ -215,7 +215,7 @@ Welcome To Japan, The Strokes, 64, 3.85, 2013, 2023-12
 50/50, The Strokes, 51, 2.72, 2013, 2023-12
 Slow Animals, The Strokes, 50, 4.34, 2013, 2023-12
 Partners In Crime, The Strokes, 50, 3.36, 2013, 2023-12
-Chances, The Strokes, 58, 3.61, 2013, 2023-12
+Chances, The Strokes, 59, 3.61, 2013, 2023-12
 Happy Ending, The Strokes, 51, 2.87, 2013, 2023-12
 Call It Fate Call It Karma, The Strokes, 74, 3.41, 2013, 2023-12
 Black Summer, Red Hot Chili Peppers, 66, 3.87, 2022, 2023-12
@@ -236,19 +236,19 @@ Sonnet, The Verve, 66, 4.36, 1997, 2023-12
 Soul to Squeeze, Red Hot Chili Peppers, 72, 4.83, 2003, 2023-12
 Fortune Faded, Red Hot Chili Peppers, 63, 3.35, 2003, 2023-12
 Save the Population, Red Hot Chili Peppers, 47, 4.09, 2003, 2023-12
-Forever, Lewis Capaldi, 77, 3.51, 2019, 2023-12
+Forever, Lewis Capaldi, 78, 3.51, 2019, 2023-12
 Clash (feat. Stormzy), Dave, 65, 4.2, 2021, 2023-12
 Treasure, Bruno Mars, 84, 2.98, 2012, 2023-12
 When It Started, The Strokes, 37, 2.91, 2002, 2023-12
 Sex on Fire, Kings of Leon, 85, 3.39, 2008, 2023-12
-Bitter Taste, Billy Idol, 21, 4.45, 2021, 2023-12
+Bitter Taste, Billy Idol, 20, 4.45, 2021, 2023-12
 Professor X, Dave, 0, 3.63, 2019, 2023-12
 Moth To A Flame (with The Weeknd), Swedish House Mafia, 76, 3.9, 2022, 2023-12
 Imagination, Foster The People, 72, 4.27, 2019, 2023-12
 Hangman, Dave, 62, 3.91, 2018, 2023-12
 Misery, Maroon 5, 38, 3.59, 2015, 2023-12
 Summertime Sadness, Lana Del Rey, 71, 4.42, 2012, 2023-12
-No Words, Dave, 65, 3.52, 2017, 2023-12
+No Words, Dave, 66, 3.52, 2017, 2023-12
 Crying Lightning, Arctic Monkeys, 2, 3.75, 2009, 2023-12
 Cornerstone, Arctic Monkeys, 1, 3.3, 2009, 2023-12
 On Time (with John Legend), Metro Boomin, 43, 2.82, 2022, 2023-12
@@ -267,7 +267,7 @@ Did I Let You Know, Red Hot Chili Peppers, 49, 4.36, 2011, 2023-12
 Police Station, Red Hot Chili Peppers, 49, 5.6, 2011, 2023-12
 Meet Me at the Corner, Red Hot Chili Peppers, 46, 4.36, 2011, 2023-12
 Payphone, Maroon 5, 71, 3.86, 2021, 2023-12
-This Love, Maroon 5, 86, 3.44, 2002, 2023-12
+This Love, Maroon 5, 87, 3.44, 2002, 2023-12
 This Is the Kitt, Red Hot Chili Peppers, 34, 4.36, 2013, 2023-12
 Leave It In My Dreams, The Voidz, 33, 3.99, 2018, 2023-12
 Heat Waves, Glass Animals, 40, 3.98, 2020, 2023-12
@@ -369,7 +369,7 @@ Torture Me, Red Hot Chili Peppers, 55, 3.74, 2006, 2023-12
 Strip My Mind, Red Hot Chili Peppers, 60, 4.32, 2006, 2023-12
 Especially in Michigan, Red Hot Chili Peppers, 55, 4.01, 2006, 2023-12
 Warlocks, Red Hot Chili Peppers, 51, 3.43, 2006, 2023-12
-Wet Sand, Red Hot Chili Peppers, 68, 5.16, 2006, 2023-12
+Wet Sand, Red Hot Chili Peppers, 67, 5.16, 2006, 2023-12
 Hey, Red Hot Chili Peppers, 57, 5.66, 2006, 2023-12
 Desecration Smile, Red Hot Chili Peppers, 58, 5.03, 2006, 2023-12
 Tell Me Baby, Red Hot Chili Peppers, 69, 4.13, 2006, 2023-12

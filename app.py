@@ -34,15 +34,11 @@ def login():
 
 @app.route('/redirect')
 def redirectPage():
-    sp_oauth =  create_spotify_oauth()
+    sp_oauth = create_spotify_oauth()
     session.clear()
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
-    session['secret_key'] = secrets.token_urlsafe(16)
-    
-    # Store the token_info using the unique secret key
-    session[session['secret_key']] = token_info
-    
+    session[TOKEN_INFO] = token_info
     return redirect(url_for('homePage', _external=True))
 
 @app.route('/homePage')
@@ -52,10 +48,7 @@ def homePage():
 @app.route('/critiquePage')
 def critiquePage():
     try:
-        secret_key = session.get('secret_key')
-        if not secret_key:
-            raise Exception("User not logged in")
-        token_info = session.get(secret_key)
+        token_info = get_token()
     except:
         print("user not logged in")
         return redirect("/")
@@ -407,12 +400,13 @@ def getTracks():
 def get_token():
     token_info = session.get(TOKEN_INFO, None)
     if not token_info:
-        raise "exception"
+        raise Exception("Token not found in session")
     now = int(time.time())
     is_expired = token_info['expires_at'] - now <60
     if (is_expired):
         sp_oauth = create_spotify_oauth()
         token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
+        session[TOKEN_INFO] = token_info
     return token_info
 
 def create_spotify_oauth():
