@@ -137,7 +137,6 @@ def getTracks():
     #Use this: https://medium.com/analytics-vidhya/your-top-100-songs-2020-in-python-and-plotly-2e803d7e2990
 
     def allPlaylistSongs():
-
         f = open('songs.csv', 'r+')
         f.truncate(0)
 
@@ -473,8 +472,8 @@ def getGenres():
 
         f.close()      
 
-    #allPlaylistGenres()
-    df = pd.read_csv('genres.csv', encoding="ISO-8859-1")
+    allPlaylistGenres()
+    df = pd.read_csv('genres.csv', encoding="ISO-8859-1",on_bad_lines="skip")
     sns.set(style="whitegrid")
 
     genre_counts = df['Genre'].value_counts().nlargest(20)
