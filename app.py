@@ -14,6 +14,7 @@ import base64
 from wordcloud import WordCloud
 import matplotlib.cm
 import matplotlib.colors
+import secrets
 
 
 app = Flask(__name__)
@@ -37,7 +38,11 @@ def redirectPage():
     session.clear()
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
-    session[TOKEN_INFO] = token_info
+    session['secret_key'] = secrets.token_urlsafe(16)
+    
+    # Store the token_info using the unique secret key
+    session[session['secret_key']] = token_info
+    
     return redirect(url_for('homePage', _external=True))
 
 @app.route('/homePage')
@@ -47,7 +52,10 @@ def homePage():
 @app.route('/critiquePage')
 def critiquePage():
     try:
-        token_info = get_token()
+        secret_key = session.get('secret_key')
+        if not secret_key:
+            raise Exception("User not logged in")
+        token_info = session.get(secret_key)
     except:
         print("user not logged in")
         return redirect("/")
