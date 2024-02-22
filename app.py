@@ -15,6 +15,7 @@ from wordcloud import WordCloud
 import matplotlib.cm
 import matplotlib.colors
 import secrets
+import os
 
 
 app = Flask(__name__)
@@ -26,8 +27,14 @@ app.secret_key = "abcdefg"
 app.config['Session_Cookie_Name'] = "Ajai's Cookie"
 TOKEN_INFO = "token_info"
 
+def cleanup():
+    cache_file = '.cache'
+    if os.path.exists(cache_file):
+        os.remove(cache_file)
+
 @app.route('/home')
 def login():
+    cleanup()
     sp_oauth = create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
@@ -39,6 +46,7 @@ def redirectPage():
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
     session[TOKEN_INFO] = token_info
+    print("Token Info:", token_info)
     return redirect(url_for('homePage', _external=True))
 
 @app.route('/homePage')
