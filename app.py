@@ -16,7 +16,6 @@ import matplotlib.cm
 import matplotlib.colors
 import secrets
 import os
-import shutil
 
 
 app = Flask(__name__)
@@ -29,9 +28,9 @@ app.config['Session_Cookie_Name'] = "Ajai's Cookie"
 TOKEN_INFO = "token_info"
 
 def cleanup():
-    cache_dir = '.cache'
-    if os.path.exists(cache_dir):
-        shutil.rmtree(cache_dir)
+    cache_file = '.cache'
+    if os.path.exists(cache_file):
+        os.remove(cache_file)
 
 @app.route('/home')
 def login():
@@ -325,7 +324,7 @@ def getTracks():
     plt.clf()
 
     ax = sns.histplot(data=df, x="Date_Added", color="lightgreen", alpha=1.0)
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
+    
     plt.xlabel('Date Added')
     plt.ylabel('Count')
     plt.title('How Many Songs Added Per Month')
