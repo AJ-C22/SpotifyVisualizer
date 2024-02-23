@@ -16,6 +16,7 @@ import matplotlib.cm
 import matplotlib.colors
 import secrets
 import os
+import shutil
 
 
 app = Flask(__name__)
@@ -28,9 +29,18 @@ app.config['Session_Cookie_Name'] = "Ajai's Cookie"
 TOKEN_INFO = "token_info"
 
 def cleanup():
-    cache_file = '.cache'
-    if os.path.exists(cache_file):
-        os.remove(cache_file)
+    cache_dir = '.cache'
+    if os.path.exists(cache_dir):
+        if os.path.isdir(cache_dir):
+            print(f"The path '{os.path.abspath(cache_dir)}' is a directory.")
+            # Do something with the directory if needed
+        elif os.path.isfile(cache_dir):
+            print(f"The path '{os.path.abspath(cache_dir)}' is a regular file.")
+            # Handle the case where it's a file
+        else:
+            print(f"The path '{os.path.abspath(cache_dir)}' is neither a directory nor a regular file.")
+    else:
+        print(f"The path '{os.path.abspath(cache_dir)}' does not exist.")
 
 @app.route('/home')
 def login():
