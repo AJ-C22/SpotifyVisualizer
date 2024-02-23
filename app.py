@@ -16,6 +16,7 @@ import matplotlib.cm
 import matplotlib.colors
 import secrets
 import os
+import shutil
 
 
 app = Flask(__name__)
@@ -28,9 +29,9 @@ app.config['Session_Cookie_Name'] = "Ajai's Cookie"
 TOKEN_INFO = "token_info"
 
 def cleanup():
-    cache_file = '.cache'
-    if os.path.exists(cache_file):
-        os.remove(cache_file)
+    cache_dir = '.cache'
+    if os.path.exists(cache_dir):
+        shutil.rmtree(cache_dir)
 
 @app.route('/home')
 def login():
