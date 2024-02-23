@@ -14,6 +14,9 @@
     -   Etc.
   - Genres
     -   Most listened to Genres
+      
+![image](https://github.com/AJ-C22/SpotifyAPI-Playlist/assets/114104270/aa7f07be-9687-4349-af0e-233afff7df43)
+![image](https://github.com/AJ-C22/SpotifyAPI-Playlist/assets/114104270/c220f125-be2d-483b-bf95-e797a5dbfe0d)
    
 ## Libraries + Sources
 #### This application used the Spotify API for OAuth and data gathering as well as Pandas, Matplotlib and Seaborn for visualizing the data. The backend was developed using a FlaskAPI which was then deployed on Heroku.
