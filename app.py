@@ -131,6 +131,8 @@ def getTracks():
     song_uris=[]
     #Use this: https://medium.com/analytics-vidhya/your-top-100-songs-2020-in-python-and-plotly-2e803d7e2990
 
+    ##MAKE GRAPH OF LEAST POPULAR SONGS (without zeroes )
+
     def allPlaylistSongs():
         f = open('songs.csv', 'r+')
         f.truncate(0)
