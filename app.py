@@ -30,7 +30,6 @@ TOKEN_INFO = "token_info"
 
 @app.route('/home')
 def login():
-    cleanup()
     sp_oauth = create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
