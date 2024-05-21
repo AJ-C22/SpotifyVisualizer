@@ -19,7 +19,7 @@
 ![image](https://github.com/AJ-C22/SpotifyAPI-Playlist/assets/114104270/c220f125-be2d-483b-bf95-e797a5dbfe0d)
    
 ## Libraries + Sources
-#### This application used the Spotify API for OAuth and data gathering as well as Pandas, Matplotlib and Seaborn for visualizing the data. The backend was developed using a FlaskAPI which was then deployed on Heroku.
+#### This application used the Spotify API for OAuth and data gathering as well as Pandas, Matplotlib and Seaborn for visualizing the data. The backend was developed using a FlaskAPI which was then deployed on Heroku (CURRENTLY NOT DEPLOYED).
 ### Sources: 
   - Extracting Songs: https://towardsdatascience.com/extracting-song-data-from-the-spotify-api-using-python-b1e79388d50
   - CSS Circles: https://freefrontend.com/css-animated-backgrounds/
